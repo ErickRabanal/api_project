@@ -12,18 +12,14 @@ const app = express();
 //configuramos cors
 app.use(cors());
 
+app.use(express.json());
 //Estableciendo conexion a la BD
 dbConection();
 //console.log(process.env);
 
 //Rutas de la APi Proyectos
-app.get('/', (req, res) => {
-    res.status(400).json({
-        ok: true,
-        msg: 'Bienvenidos a NodeJS'
-    });
-
-});
+app.use('/api/usuarios', require('./routes/usuarios.routes'))
+app.use('/api/login', require('./routes/auth.routes'));
 
 //codigo para desplegara
 app.listen(process.env.PORT, () => {
